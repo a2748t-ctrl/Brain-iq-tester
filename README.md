@@ -1,0 +1,83 @@
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IQ Challenge – 21 Pages</title>
+<style>
+:root{color-scheme:dark;--bg:#070b1a;--card:#101733cc;--tx:#e8ecff;--mu:#9aa6d6;--ac:#5eead4;--ac2:#a78bfa;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+#brain{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.35;pointer-events:none}
+#top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:#070b1ae6;border-bottom:1px solid #ffffff18;backdrop-filter:blur(8px)}
+#timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ac);font-size:1.2rem}
+main{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px}
+h1{font-size:1.7rem;margin:.3em 0;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{color:var(--mu);line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.p{background:var(--card);border:1px solid #ffffff1a;border-radius:14px;padding:12px;text-align:center}
+.av{width:64px;height:64px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;font-weight:800;font-size:1.3rem;color:#071;color:#08101f}
+.p b{display:block;font-size:.95rem}.p small{color:var(--mu);display:block}
+.iq{color:var(--ac);font-weight:700;margin-top:4px}
+.bar{height:6px;background:#ffffff1f;border-radius:4px;margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 20px;font-weight:700;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#08101f}
+button:disabled{opacity:.4;cursor:not-allowed}
+.q{background:var(--card);border:1px solid #ffffff1a;border-radius:16px;padding:18px;margin-top:12px}
+.q h2{font-size:1.25rem;margin:0 0 14px;color:var(--tx)}
+.o{display:block;width:100%;text-align:left;margin:8px 0;padding:14px;border-radius:12px;background:#ffffff0f;color:var(--tx);border:1px solid #ffffff22;font-weight:500}
+.o.sel{border-color:var(--ac);background:#5eead433}
+.prog{height:6px;background:#ffffff1f;border-radius:4px;margin:6px 0}.prog i{display:block;height:100%;background:var(--ac);border-radius:4px}
+.big{font-size:3.5rem;font-weight:800;color:var(--ac);margin:0}
+.note{font-size:.8rem;color:var(--mu)}
+.av svg{width:100%;height:100%}.av{overflow:hidden;position:relative}
+footer{position:relative;z-index:1;text-align:center;padding:24px 16px 32px;border-top:1px solid #ffffff18;margin-top:24px;background:#070b1acc}
+footer button{background:none;color:var(--ac);padding:6px 12px;font-weight:600}
+#md{position:fixed;inset:0;z-index:20;background:#000a;display:none;place-items:center;padding:16px}
+#md div{background:#101733;border:1px solid #ffffff33;border-radius:16px;max-width:520px;max-height:80vh;overflow:auto;padding:20px}
+.cmp{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:.9rem}.cmp span{width:110px;flex:none;color:var(--mu)}.cmp .bar{flex:1;height:10px;margin:0}.cmp b{width:36px;text-align:right}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.row .av{width:80px;height:80px;margin:0}
+</style></head><body>
+<svg id="brain" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"></svg>
+<div id="top"><span id="pg">Home</span><span id="timer">⏱ 00:00</span></div>
+<main id="app"></main>
+<footer><div><button onclick="info('about')">About</button><button onclick="info('tc')">T&amp;C</button><button onclick="info('help')">Help</button><button onclick="info('privacy')">Privacy</button></div><p class="note">© 2026 IQ Challenge · Sirf manoranjan ke liye</p></footer>
+<div id="md" onclick="if(event.target===this)this.style.display='none'"><div><h2 id="mt"></h2><p id="mb"></p><button onclick="$('#md').style.display='none'">Band karo</button></div></div>
+<script>
+const P=[["Isaac Newton","Physicist",190,7],["Albert Einstein","Physicist",160,8],["Leonardo da Vinci","Artist-Scientist",180,9],["Johann Goethe","Writer",210,9],["Galileo Galilei","Astronomer",185,8],["Marie Curie","Scientist",180,8],["Stephen Hawking","Physicist",160,8],["Nikola Tesla","Inventor",170,9],["Aristotle","Philosopher",190,8],["Charles Darwin","Naturalist",165,7],["Mozart","Composer",165,10],["Thomas Edison","Inventor",145,6],["Blaise Pascal","Mathematician",195,10],["Carl Gauss","Mathematician",190,10],["Leonhard Euler","Mathematician",180,9],["Srinivasa Ramanujan","Mathematician",185,10],["Archimedes","Mathematician",180,8],["Alan Turing","Computer Scientist",185,9],["Ada Lovelace","Mathematician",170,8],["Immanuel Kant","Philosopher",175,7],["Voltaire","Writer",190,8],["John von Neumann","Polymath",190,10],["Benjamin Franklin","Statesman",160,8],["C. V. Raman","Physicist",165,8],["Rabindranath Tagore","Poet",170,8],["APJ Abdul Kalam","Scientist",150,7]];
+const Q=[["2, 4, 8, 16, ?",["24","32","30","20"],1],["3, 6, 12, 24, ?",["36","42","48","30"],2],["1, 4, 9, 16, ?",["20","25","24","36"],1],["Odd one out?",["Apple","Banana","Carrot","Mango"],2],["Book : Read :: Fork : ?",["Eat","Cook","Spoon","Cut"],0],["Sab Bloops Razzies hain, sab Razzies Lazzies hain. Kya sab Bloops Lazzies hain?",["Haan","Nahi","Pata nahi","Kabhi kabhi"],0],["1, 1, 2, 3, 5, 8, ?",["11","12","13","15"],2],["5 machines 5 min me 5 widgets banati hain. 100 machines 100 widgets kitne min me?",["100","20","5","1"],2],["A, C, E, G, ?",["H","I","J","K"],1],["12 ÷ 0.5 = ?",["6","24","12","0.24"],1],["Odd one out: 2, 3, 5, 9, 11",["2","3","9","11"],2],["3:00 baje ghadi ke kaanto ke beech kitne degree?",["60°","90°","120°","45°"],1],["Rahul > Amit (height), Amit > Sunil. Sabse chhota kaun?",["Rahul","Amit","Sunil","Pata nahi"],2],["Cube me kitne edges hote hain?",["6","8","12","10"],2],["2, 6, 12, 20, 30, ?",["40","42","44","36"],1],["“LISTEN” ka anagram?",["Silent","Tinsel","Enlist","Teslin"],0],["Bat + ball = ₹1.10. Bat ball se ₹1 mehnga hai. Ball kitne ka?",["10 paise","5 paise","15 paise","1 rupaya"],1],["100, 50, 25, 12.5, ?",["6.25","7","5","10"],0],["“Expand” ka opposite?",["Grow","Contract","Stretch","Lift"],1]];
+const N=Q.length, ans=[]; let cur=0,t0=null,tick=null,final=0;
+const $=s=>document.querySelector(s),app=$("#app");
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+function startTimer(){if(tick)return;t0=Date.now();tick=setInterval(()=>{$("#timer").textContent="⏱ "+fmt(Math.floor((Date.now()-t0)/1000))},500)}
+const av=(p,c)=>`<div class="av" style="background:${c}"><svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="11" fill="#08101f" opacity=".8"/><path d="M8 64C8 44 20 38 32 38S56 44 56 64Z" fill="#08101f" opacity=".8"/><text x="32" y="58" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">${p[0].split(" ").map(w=>w[0]).slice(0,2).join("")}</text></svg></div>`;
+const INFO={about:["About","IQ Challenge ek chhota manoranjan wala dimaagi test hai: 19 sawaal, live timer aur end me report. Mahan logon ke IQ aur seekhne ki speed andaazan hain."],tc:["Terms & Conditions","1) Yeh asli ya clinical IQ test nahi hai. 2) Score sirf maze ke liye hai, kisi admission, naukri ya medical faisle ke liye nahi. 3) Mahan logon ke IQ researchers ke andaaze hain, pakke tathya nahi. 4) Average aur IIT ke IQ rough andaaze hain."],help:["Help","Test shuru karne ke liye Home pe 'Test shuru karo' dabao. Har sawaal me ek option chuno, phir 'Aage'. Timer pehle sawaal se chalta hai aur report pe ruk jata hai. Dobara dene ke liye report pe 'Dobara try karo' dabao."],privacy:["Privacy","Aapke jawab sirf aapke browser me rehte hain; kahin bheje ya save nahi hote."]};
+function info(k){$("#mt").textContent=INFO[k][0];$("#mb").textContent=INFO[k][1];$("#md").style.display="grid"}
+function home(){cur=0;$("#pg").textContent="Page 1 / 21 · Home";
+const cols=["#5eead4","#a78bfa","#fbbf24","#f472b6","#60a5fa","#34d399"];
+app.innerHTML=`<h1>🧠 IQ Challenge</h1><p>19 sawaal, live timer, aur end me aapki IQ report. Pehle dekhiye duniya ke mahan logon ke <b>andaazan</b> IQ aur seekhne ki speed.</p><button id="go">Test shuru karo →</button>
+<p class="note">Note: itihaas ke logon ke IQ asli test se nahi, researchers ke andaaze (jaise Cox, 1926) ya popular estimates hain. Photos ki jagah initials use hue hain.</p>
+<div class="grid">${P.map((p,i)=>`<div class="p">${av(p,cols[i%6])}<b>${p[0]}</b><small>${p[1]}</small><div class="iq">IQ ≈ ${p[2]}</div><small>Learn speed ${p[3]}/10</small><div class="bar"><i style="width:${p[3]*10}%"></i></div></div>`).join("")}</div>`;
+$("#go").onclick=()=>{startTimer();q(0)}}
+function q(i){cur=i;$("#pg").textContent=`Page ${i+2} / 21 · Question ${i+1}/${N}`;const d=Q[i];
+app.innerHTML=`<div class="prog"><i style="width:${(i/N)*100}%"></i></div><div class="q"><p>Sawaal ${i+1}</p><h2>${d[0]}</h2>${d[1].map((o,k)=>`<button class="o${ans[i]===k?" sel":""}" data-k="${k}">${"ABCD"[k]}. ${o}</button>`).join("")}</div><p><button id="nx" ${ans[i]==null?"disabled":""}>${i==N-1?"Report dekho":"Aage →"}</button></p>`;
+document.querySelectorAll(".o").forEach(b=>b.onclick=()=>{ans[i]=+b.dataset.k;q(i)});
+$("#nx").onclick=()=>i==N-1?report():q(i+1)}
+function report(){clearInterval(tick);final=Math.floor((Date.now()-t0)/1000);$("#pg").textContent="Page 21 / 21 · Report";
+const c=Q.filter((d,i)=>ans[i]===d[2]).length,iq=70+Math.round(c/N*80);
+const lvl=iq>=140?"Genius level":iq>=120?"Bahut tez":iq>=100?"Average se upar":iq>=85?"Average":"Practice zaroori";
+const near=P.reduce((a,b)=>Math.abs(b[2]-iq)<Math.abs(a[2]-iq)?b:a);
+const sp=final/N,speed=sp<20?"Bahut tez":sp<45?"Tez":"Dheere aur dhyan se";
+app.innerHTML=`<h1>📊 Aapki IQ Report</h1><div class="q"><p>Estimated IQ</p><p class="big">${iq}</p><p><b>${lvl}</b></p>
+<p>Sahi jawab: <b>${c}/${N}</b><br>Kul samay: <b>${fmt(final)}</b> (har sawaal ~${sp.toFixed(0)} sec)<br>Seekhne/sochne ki speed: <b>${speed}</b><br>Aapka score <b>${near[0]}</b> (IQ ≈ ${near[2]}) ke sabse kareeb hai.</p>
+<div class="row">${av(near,"#5eead4")}<svg width="80" height="80" viewBox="0 0 80 80"><rect x="16" y="22" width="48" height="40" rx="10" fill="#a78bfa"/><line x1="40" y1="22" x2="40" y2="10" stroke="#5eead4" stroke-width="3"/><circle cx="40" cy="8" r="4" fill="#5eead4"/><circle cx="30" cy="40" r="6" fill="#08101f"/><circle cx="50" cy="40" r="6" fill="#08101f"/><circle cx="30" cy="40" r="2.5" fill="#5eead4"/><circle cx="50" cy="40" r="2.5" fill="#5eead4"/><rect x="28" y="52" width="24" height="4" rx="2" fill="#08101f"/></svg></div>
+<p><b>IQ comparison</b></p>${[["Aap",iq],[near[0].split(" ").pop(),near[2]],["Average insaan",100],["IIT average*",128]].map(r=>`<div class="cmp"><span>${r[0]}</span><div class="bar"><i style="width:${r[1]/2.2}%"></i></div><b>${r[1]}</b></div>`).join("")}<p class="note">*IIT average ek rough andaaza hai, official aankda nahi.</p>
+<p class="note">Yeh sirf manoranjan ke liye chhota test hai, asli IQ test nahi.</p></div><p><button id="re">Dobara try karo</button></p>`;
+$("#re").onclick=()=>{ans.length=0;tick=null;$("#timer").textContent="⏱ 00:00";home()}}
+// AI brain background
+(function(){const s=$("#brain");let h='<defs><radialGradient id="g"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient></defs>';
+h+='<path d="M400 90C300 70 190 120 170 230C120 260 120 350 170 380C170 450 250 500 330 480L330 540L470 540L470 480C550 500 630 450 630 380C680 350 680 260 630 230C610 120 500 70 400 90Z" fill="none" stroke="#5eead4" stroke-width="3" opacity=".7"/><path d="M400 90V470" stroke="#a78bfa" stroke-width="2" opacity=".5"/>';
+let r=7,pts=[];const R=()=>(r=r*16807%2147483647)/2147483647;
+while(pts.length<60){const x=180+R()*440,y=110+R()*370;if(Math.abs(x-400)<230*(1-Math.abs(y-290)/260))pts.push([x,y])}
+pts.forEach((a,i)=>pts.forEach((b,j)=>{if(j>i&&Math.hypot(a[0]-b[0],a[1]-b[1])<75)h+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#5eead4" stroke-opacity=".35"/>`}));
+pts.forEach(a=>h+=`<circle cx="${a[0]}" cy="${a[1]}" r="5" fill="url(#g)"><animate attributeName="opacity" values=".3;1;.3" dur="${2+R()*3}s" repeatCount="indefinite"/></circle>`);
+s.innerHTML=h})();
+home();
+</script></body></html>
