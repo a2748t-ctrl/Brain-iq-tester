@@ -1,1 +1,0 @@
-# Brain-iq-tester
